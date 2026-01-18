@@ -39,3 +39,18 @@ class RecipesAdminForLink:
             if name.lower() in item.get('name', '').lower():
                 recipe_collection.append(item)
         return recipe_collection
+    def get_recipes_by_date(self,date:str)->List[dict]:
+        """
+        Sort/filter a list of recipe entries to find recipes by date.
+        Parameters:
+            date: str - The date to search for (e.g., "2023-10-01")
+            recipes: list[dict] - A list of recipe entries loaded from JSON
+        """
+        recipe_collection=[]
+        with open('recipes/recipes.json', 'r') as file:
+            recipes = json.load(file)
+        for item in recipes:
+            # Check if the date matches the recipe's date
+            if date == item.get('date', ''):
+                recipe_collection.append(item)
+        return recipe_collection
